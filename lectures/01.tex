@@ -1,0 +1,347 @@
+% 2023.02.14: lecture 01
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\section{Кооперативная теория игр}
+
+\subsection{Аксиоматика теории Шепли}
+
+\begin{df}[Кооперативная игра]
+	Кооперативная игра это пара $(N, v)$, где  $N = \{1, 2, \ldots, n\}$ - множество игроков.
+
+	 $v : 2^{N} \to \R$ - характеристическая функция(показывает суммарный выигрыш коалиции), т.е. $v(\varnothing) = 0$.
+\end{df}
+
+\begin{exmpl}
+	Пусть есть три музыканта, которые хотят собраться вместе и дать концерт, тогда $N = \{1, 2, 3\}$ и 
+
+	\begin{align*}
+		v(\{1\}) = 5 \quad v(\{2\}) &= 7 \quad v(\{3\}) = 4 \\
+		v(\{12\}) = 20 \quad v(\{13\}) &= 10 \quad v(\{23\}) = 20 \\
+		v(\{123\}) &= 100
+	\end{align*}
+
+\end{exmpl}
+
+\begin{df}[Значение кооперативной игры]
+	Значением кооперативной игры называется функция $\phi : G(N) \to \R^{n}$, где $G(N)$ - множество характеристических функций с множеством игроков  $N$.
+	Т.е. функция $\phi$ в том числе задает дележ выигрыша между игроками.
+
+	Через $\phi_i(v)$ обозначаем выигрыш  $i$ игрока при выигрыше  характеристической функции $v$.
+\end{df}
+
+\begin{exmpl}[Парам]
+	$L, R, L \cap R = \varnothing, L \cup R = N$ 
+
+	\todo[inline]{ну я тут проморгал :)}
+\end{exmpl}
+
+\begin{df}[Игра единодушие (unaminity game)] \label{definition:unaminity_game}
+	\begin{align*}
+		v_S(K) = \begin{cases}
+			1, S \subseteq K \\
+			0, \text{иначе}
+		\end{cases}
+	\end{align*},
+	где $S \subseteq N, S \neq \varnothing$.
+\end{df}
+
+\begin{exmpl}
+	Пусть $N = \{1, 2, 3\}$. Тогда $v_{12}(1) = 0, v_{12}(2) = 0, v_{12}(3) = 0, v_{12}(12) = 1, v_{12}(13) = 0, v_{12}(23) = 0, v_{12}(123) = 1$.
+\end{exmpl}
+
+\begin{df}[Аксиомы] \label{axiom:shapley}
+	\todo[inline]{todo}
+	\begin{enumerate}
+		\item Аксиома эффективности.\label{axiom:shapley_efficenty} 
+
+		При делении выигрыша не будет остатка, т.е. 
+
+		\begin{align*}
+			\sum_{i \in N} \phi_i(v) = v(N)
+		\end{align*}
+		\item Аксиома нулевого игрока. \label{axiom:shapley_zero_player}
+
+		Если $v(K \cup \{i\}) = v(K), \  \forall K \subseteq N \setminus \{i\}$, то 
+
+		\begin{align*}
+			\phi_i(v) = 0
+		\end{align*}
+
+	\item Аксиома симметрии. \label{axiom:shapley_symmetry}
+
+		Если $v(K \cup \{i\}) = v(K \cup \{j\}), \ \forall K \subseteq N \setminus \{i, j\}$, то 
+
+		\begin{align*}
+			\phi_i(v) = \phi_j(v)
+		\end{align*}
+
+	\item Аксиома аддитивности. \label{axiom:shapley_additivity}
+
+		Для любых $\forall v, w \in G(N)$ следует, что
+
+		\begin{align*}
+			\phi(v + w) = \phi(v) + \phi(w)
+		\end{align*}
+
+		Т.е. неважно на каком этапе делить(как в самом конце, так и например сначала посередине игры, а потом еще раз в конце).
+	\end{enumerate}
+\end{df}
+
+\begin{thm}[Теорема Шепли] \label{theorem:shepli}
+	Аксиомам \ref{axiom:shapley} удовлетворяет единственный дележ:
+
+	\begin{align*}
+		\phi_i(v) = \sum_{\substack{K \subseteq N \\ i \in K}} \frac{(|K| - 1)! (|N| - |K|)!}{|N|!} (v(K) - v(K \setminus \{i\}))
+	\end{align*}, также называется значением Шепли.
+
+\end{thm}
+
+\begin{lm} \label{lemma:win_unaminity_game}
+	Пусть $\phi $ удовлетворяет аксиомам \ref{axiom:shapley}, тогда 
+
+	\begin{align*}
+		\phi_i(v_S) = \begin{cases} 
+			\frac{1}{|S|}, \quad i \in S \\
+			0, \quad \text{иначе}
+		\end{cases}
+	\end{align*}, где $v_S$ из игры единодушие \ref{definition:unaminity_game}.
+
+\end{lm}
+
+\begin{proof}
+	$N \setminus S$ - множество нулевых игроков, по аксиоме \eqref{axiom:shapley_zero_player} следует что  $\phi_i(v_S) = 0, \forall i \in N \setminus S$.
+
+	По аксиоме \eqref{axiom:shapley_efficenty} следует, что  $\sum_{i \in S} \phi_i(v_S) = 1$, но по аксиоме \eqref{axiom:shapley_symmetry} игроки не отличимы, а значит  $\phi_i(v_S) \cdot |S| = 1$.
+\end{proof}
+
+\begin{lm} \label{lemma:uniformity_unaminity_game}
+	Пусть $\alpha \in R$ - константа, тогда  $\phi_i(\alpha \cdot v_S) = \alpha \phi_i(v_S)$, где $\phi$ удовлетворяет аксиомам \ref{axiom:shapley}.
+
+	Игра опять единодушие \ref{definition:unaminity_game}.
+\end{lm}
+
+\begin{proof}
+	Тривиально расписывая определение $\phi_i(\alpha \cdot v_S)$ и  $\alpha \cdot \phi_i(v_S)$ по Лемме \ref{lemma:win_unaminity_game} получаем нужное равенство.
+\end{proof}
+
+\begin{lm} \label{lemma:basis_to_unaminity_game}
+	На множестве $G(N)$ существует базис из  $\{v_S(K)\}$, т.е. для произвольное $v \in G(N)$ выполняется:
+	\begin{align*}
+		v(K) = \sum_{S \subseteq N} \lambda_S(v) \cdot v_S(K)
+	\end{align*}, где 
+
+	\begin{align*}
+		\lambda_S(v) = \sum_{R \subseteq S} (-1)^{|S| - |R|} v(R)
+	\end{align*}
+
+	Где $v_S$ из игры единодушие \ref{definition:unaminity_game}.
+
+\end{lm}
+
+\begin{exmpl}
+	$N = \{1, 2, 3\}$
+	\begin{align*}
+		v(K) = \lambda_1 v_1(k) + \lambda_2 v_2(k) + \lambda_3 v_3(k) + \lambda_{12} v_{12}(k) + \lambda_{13}v_{13}(k) + \lambda_{23} v_{23}(k) + \lambda_{123} v_{123}(k)
+	\end{align*}
+
+	Тогда 
+
+	\begin{align*}
+		v(\{1\}) &= \lambda_1, \quad v(\{2\}) = \lambda_2, \quad v(\{3\}) = \lambda_3 \\
+		v(\{12\}) &= \lambda_1 + \lambda_2 + \lambda_{12} \implies \lambda_{12} = v(\{12\}) - v(\{1\}) - v(\{2\}) \\
+		\lambda_{13} &= v({13}) - v(\{1\}) - v(\{3\}) \\
+		\lambda_{23} &= v(\{23\}) - v(\{2\}) - v(\{3\}) \\
+		\lambda_{123} &= v(\{123\}) - v(\{12\}) - v(\{13\}) - v(\{23\}) + v(\{1\}) + v(\{2\}) + v(\{3\})
+	\end{align*}
+\end{exmpl}
+
+\begin{proof}[\normalfont\textsc{Доказательство Леммы \ref{lemma:basis_to_unaminity_game}}]
+	Доказательство леммы как в примере применяя индукцию.
+\end{proof}
+
+\begin{proof}[\normalfont\textsc{Доказательство Теоремы \ref{theorem:shepli}}]
+	Хотим показать, что 
+
+	\begin{align*}
+		\phi_i(v) = \sum_{\substack{K \subseteq N \\ i \in K}} \frac{(|K| - 1)! \cdot (|N| - |K|)!}{|N|!} (v(K) - v(K \setminus \{i\}))
+	\end{align*}
+
+	Пусть $v \in G(N)$ и пусть  $\phi$ удовлетворяет аксиомам \ref{axiom:shapley}.
+
+	По Лемме \ref{lemma:basis_to_unaminity_game}:
+	 \begin{align*}
+		 \phi_i(v) = \phi_i \left(\sum_{K \subseteq N} \lambda_K (v) \cdot v_K\right) =
+	\end{align*}
+
+	По аксиоме \eqref{axiom:shapley_additivity}:
+
+	\begin{align*}
+		= \sum_{K \subseteq N} \phi_i(\lambda_K(v) \cdot v_K) =
+	\end{align*}
+
+	По Лемме \ref{lemma:uniformity_unaminity_game}:
+
+	\begin{align*}
+		= \sum_{K \subseteq N} \lambda_K(v) \cdot \phi_i(v_K) =
+	\end{align*}
+
+	По Лемме \ref{lemma:win_unaminity_game}:
+
+	\begin{align*}
+		= \sum_{\substack{k \subseteq N \\ i \in k}} \frac{\lambda_k(v)}{|k|} = \sum_{\substack{k \subseteq N \\ i \in k}} \frac{(|K| - 1)! \cdot (|N| - |K|)!}{|N|} (v(K) - v(K \setminus \{i\}))
+	\end{align*}
+
+	Последний переход без подробных объяснений.
+
+	Легко проверить что полученная $\phi$ удовлетворяет аксиомам.
+
+\end{proof}
+
+\begin{exmpl}
+	Пусть $N = \{1, 2\}$,  $v \colon 2^{N} \to \R$, тогда
+
+	\begin{align*}
+		\phi_1(v) &= \sum_{K \subseteq N, i \in K} \frac{\lambda_K(v)}{|K|} = \lambda_1(v) + \frac{\lambda_{12}(v)}{2} = v(\{1\}) + \frac{v(\{12\}) - v(\{1\}) - v(\{2\})}{2} \\
+		\phi_2(v) &=  \sum_{K \subseteq N, i \in K} \frac{\lambda_K(v)}{|K|} = \lambda_2(v) + \frac{\lambda_{12}(v)}{2} = v(\{2\}) + \frac{v(\{12\}) - v(\{1\}) - v(\{2\})}{2}
+	\end{align*}
+\end{exmpl}
+
+На формулу из Теоремы \ref{theorem:shepli} можно смотреть в терминах перестановок.
+Коалиция $i$ игрока это перестановка на  $|N|$ элементах, где  $i$ игрок стоит на  $k$ месте, т.е. до него стоит произвольный  $|K| - 1$ игрок, а после него произвольные $|N| - |K|$ игроков, тогда значение Шепли как бы усредняем выигрыш по всем равновероятным перестановкам.
+
+\todo[inline]{подробнее написать про перестановки}
+
+ \begin{exmpl}
+	 Пусть $N = \{1, 2, 3\}$,  $v : 2^{N} \to \R$:
+
+	 \begin{align*}
+		 v(\{1\}) = 2 \quad v(\{2\}) &= 3 \quad v(\{3\}) = 2 \\
+		 v(\{12\}) = 4 \quad v(\{13\}) &= 2 \quad v(\{23\}) = 5 \\
+		 v(\{123\}) &= 10
+ 	 \end{align*}
+
+	 Выписываем все перестановки:
+
+
+		{ \centering
+\renewcommand{\arraystretch}{1.3}
+			\begin{tabular}{l|ccc}
+			  & 1 & 2 & 3\\
+			  \hline
+				1 2 3  & 2 & 2 & 6 \\
+				1 3 2 & 2 & 8 & 0 \\
+				2 1 3 & 1 & 3 &  6\\
+				2 3 1 & 5 & 3 & 2\\
+				3 1 2 & 0 & 8 & 2 \\
+				3 2 1 & 5 & 3 & 2 \\
+				$\phi$ &  $\frac{\sum}{6}$ & $\frac{\sum}{6}$ & $\frac{\sum}{6}$ \\
+					   & $\frac{15}{6}$ & $\frac{27}{6}$ & $3$ \\
+					   & 2.5 & 4.5 & 3
+			\end{tabular}\par
+		}
+
+		Пусть перестановка $a, b, c$, тогда считаем выигрыш  $a$, это $v(a)$, выигрыш  $b$ это  $v(ab) - v(a)$, выигрыш  $c$ это  $v(abc) - v(ab)$. 
+
+		И тогда $\phi$ от игрока это сумма в столбце делить на  $|N|!$, т.е. усреднение.
+
+		В каком то смысле значение Шепли это мат. ожидание на перестановках, откуда сразу выводится линейность.
+
+	 
+\end{exmpl}
+
+\subsection{Тут что то другое уже пошло}
+
+\begin{remrk}
+	Игра в нормальной форме это $(N, \{S_i\}_{i \in N}, \{u_i\}_{i \in N})$ - множество игроков, стратегий и выигрышей.
+
+	\begin{align*}
+		u_1(s_1^*, s_2^*, s_3^*) - u_1(s_1, s_2^*, s_3^*) \geqslant 0, \ \forall s_1 \\
+		u_2(s_1^*, s_2^*, s_3^*) - u_2(s_1^*, s_2, s_3^*) \geqslant 0, \ \forall s_2 \\
+		u_3(s_1^*, s_2^*, s_3^*) - u_3(s_1^*, s_2^*, s_3) \geqslant 0, \ \forall s_3
+	\end{align*} ~--- равновесие по Нешу.
+
+	Существует в смешанных стратегиях, но порой нас интересует в чистых.
+
+	Какие ограничения можно наложить, чтобы такое равновесие в чистых стратегиях всегда существовало?
+
+
+\end{remrk}
+
+
+Пусть $P$, такая что 
+
+\begin{align*}
+	u_1(s_1^*, s_2^*, s_3^*) - u_1(s_1, s_2^*, s_3^*) = P(s_1^*, s_2^*, s_3^*) - P(s_1, s_2^*, s_3^*), \ \forall s_1 \\
+	u_2(s_1^*, s_2^*, s_3^*) - u_2(s_1^*, s_2, s_3^*) = P(s_1^*, s_2^*, s_3^*) - P(s_1^*, s_2, s_3^*), \ \forall s_2 \\
+	u_3(s_1^*, s_2^*, s_3^*) - u_3(s_1^*, s_2^*, s_3) = P(s_1^*, s_2^*, s_3^*) - P(s_1^*, s_2^*, s_3), \ \forall s_3 \\
+\end{align*}
+
+\begin{df}[Потенциальная игра]
+	Игра Г называется потенциальной, если существует $P : \prod_{i \in N} S_i \to \R$, такая что 
+
+	\begin{align*}
+		u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) = P(s_i, s_{-i}) - P(s_i', s_{-i}), \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i}
+	\end{align*}
+
+\end{df}
+
+\begin{claim}
+	Пусть $s^* \in \text{argmax}_{s \in S} P(s)$.
+	Тогда  $s^*$ - неравенство Неша в игре Г. 
+\end{claim}
+
+\begin{proof}
+	\begin{align*}
+		P(s^*) - P(s_i, s_{-i}^*) &\geqslant 0 \ \forall s_i \in S_i \implies \\
+		u_i(s^*) - u_i(s_i, s^*_{-i}) &\geqslant 0 \ \forall s_i \in S_i
+	\end{align*}
+\end{proof}
+
+\begin{df}[Ординально-потенциальная игра]
+	Игра называется ординально-потенциальной, тогда и только тогда, когда 
+
+	\begin{align*}
+		u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) \geqslant 0 \iff P(s_i, s_{-i}) - P(s_i', s_{-i}) \geqslant 0, \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i}
+	\end{align*}
+
+	Аналогичное утверждение тому, что приведено выше справедливо и для ординально-потенциальной игры.
+\end{df}
+
+\begin{exmpl}
+	Пусть $u_i(s) = s_i$, где  $S_i = [0, A_i]$, тогда  $P(s) = \sum_{i \in N} s_i$.
+\end{exmpl}
+
+\begin{exmpl}[Олигаполия Курно]
+	\begin{align*}
+		u_i(s) = (p - \sum_{i \in N} s_i) \cdot s_i - c_i s_i, \quad s_i \in [0, A_i]
+	\end{align*}
+
+	Идейно, фирма решает сколько товара ей надо производить(обратная функция спроса).
+	Чем больше товара мы выпустили, тем цена меньше и есть еще затраты на производство.
+
+	Считаем, что $p - n A \geqslant 0$(т.е. цена положительна сколько бы товара мы не выпускали).
+
+	Неравенство Неша существует, т.к. функции вогнутые, а пространство компактно.
+
+\end{exmpl}
+
+\begin{problem}
+	Найти потенциальную функцию в примере выше.
+\end{problem}
+
+\begin{problem}
+	Пусть $N = \{1, 2, 3\}$ и 
+
+	\begin{align*}
+		v(1) = 5 \quad v(2) &= 6 \quad v_3 = 4 \\
+		v(12) = 8 \quad v(13) &= 6 \quad v(23) = 10 \\
+		v(123) = 15
+	\end{align*}
+
+	Вычислить значение Шепли:  $\phi_1, \phi_2, \phi_3$ - ?
+
+\end{problem}
+
+
+\end{document}
