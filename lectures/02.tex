@@ -100,13 +100,13 @@
 	Проверим на $s_i = 0, s_i' \neq 0$, тогда  $u_i(s_i, s_{-i}) = 0$ и  $u_i(s_i', s_{-i}) \neq 0$, но  $P(s_i, s_{-i}) - P(s_i', s_{-i}) = 0$.
 \end{exmpl}
 
-Пусть Г - игра в нормальной форме, рассмотрим двух игроков $i, j \in N, \, s_i, s_i' \in S_i, \, s_j, s_j' \in S_j, \, s_{-ij} \in S_{-ij}$, где Г  $= (N, \{s_i\}_{i \in N}, \{u_i\}_{i \in N})$, предположим что Г потенциальная игра с функцией  $P$, тогда:
+Пусть Г - игра в нормальной форме, рассмотрим двух игроков $i, j \in N, \, s_i, s_i' \in S_i, \, s_j, s_j' \in S_j, \, s_{-ij} \in S_{-ij}$, где Г  $= (N, \{s_i\}_{i \in N}, \{u_i\}_{i \in N})$, предположим что Г потенциальная игра с функцией  $P$, тогда давайте запишем равенства и по очереди будем менять стратегию у $i$ и  $j$, заодно введем новое обозначение $\Delta$:
 
 \begin{align*}
-	u_i(s_i, s_j, s_{-ij}) - u_i(s_i', s_j, s_{-ij}) &= P(s_i, s_j, s_{-ij}) - P(s_i', s_j, s_{-ij}) \text{, $j$ меняет стратегию} \\
-	u_j(s_i', s_j, s_{-ij}) - u_j(s_i', s_j', s_{-ij}) &= P(s_i', s_j, s_{-ij}) - P(s_i', s_j', s_{-ij}) \text{, $i$ меняет обратно}\\
-	u_i(s_i', s_j', s_{-ij}) - u_i(s_i, s_j, s_{-ij}) &= P(s_i', s_j', s_{-ij}) - P(s_i, s_j', s_{-ij}) \text{, $j$ меняет обратно} \\
-	u_j(s_i, s_j', s_{-ij}) - u_j(s_i, s_j, s_{-ij}) &= P(s_i, s_j', s_{-ij}) - P(s_i, s_j, s_{-ij})
+	u_i(s_i, s_j, s_{-ij}) - u_i(s_i', s_j, s_{-ij}) &= P(s_i, s_j, s_{-ij}) - P(s_i', s_j, s_{-ij}) = \Delta_i \\
+	u_j(s_i', s_j, s_{-ij}) - u_j(s_i', s_j', s_{-ij}) &= P(s_i', s_j, s_{-ij}) - P(s_i', s_j', s_{-ij}) = \Delta_j \\
+	u_i(s_i', s_j', s_{-ij}) - u_i(s_i, s_j, s_{-ij}) &= P(s_i', s_j', s_{-ij}) - P(s_i, s_j', s_{-ij}) = \Delta_i' \\
+	u_j(s_i, s_j', s_{-ij}) - u_j(s_i, s_j, s_{-ij}) &= P(s_i, s_j', s_{-ij}) - P(s_i, s_j, s_{-ij}) = \Delta_j'
 \end{align*}
 
 Заметим что сумма правых частей равна 0.
@@ -237,7 +237,7 @@
 \begin{figure}[ht]
     \centering
 	\incfig[0.5]{example-congestion-game}
-    \caption{example-congestion-game}
+    \caption{Пример для игры заполнения}
     \label{fig:example-congestion-game}
 \end{figure}
 
@@ -256,15 +256,15 @@
 \end{align*}
 
 \begin{problem}
-	Пусть игроки распределяются на коалиции, а его выигрыш это значение Шепли.
+	Пусть игроки распределяются на коалиции, выигрыш игрока это значение Шепли.
 
-	Пусть $\{\{1, 2, 3\}, \{4, 5\}\}$, тогда считаем что $v$ дана.
+	Пусть, например коалиции $\{\{1, 2, 3\}, \{4, 5\}\}$ и считаем, что $v$ дана.
 
-	Назовем устойчивым по Нешу, если игроку не выгодно покидать коалицию(и переходить в другие).
+	Назовем равновесие устойчивым по Нешу, если игроку не выгодно покидать коалицию(и переходить в другие).
 
 	\begin{align*}
-		u_i(\pi) &= \sum_{\substack{K \subseteq \pi(i) \\ i \in K}} \frac{\lambda_k(v)}{|k|}, \quad \text{где} \\
-		\lambda_k(v) &= \sum_{\substack{R \subseteq K \\ R \neq \varnothing}} (-1)^{|R| - |K|} v(R)
+		u_i(\pi) &= \sum_{\substack{K \subseteq \pi(i) \\ i \in K}} \frac{\lambda_K(v)}{|K|}, \quad \text{где} \\
+		\lambda_K(v) &= \sum_{\substack{R \subseteq K \\ R \neq \varnothing}} (-1)^{|K| - |R|} v(R)
 	\end{align*}
 
 	Где $\pi(i)$ - коалиция в которой содержится  $i$ игрок.
