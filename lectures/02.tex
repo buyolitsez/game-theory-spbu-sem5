@@ -75,7 +75,7 @@
 		u_i(s) = s_i\left(\frac{A}{\sum_{j \in N} s_j} - c\right)
 	\end{align*}
 
-	Предполагаем что выражение под скобками положительно, ведь иначе не выгодно покупать ни одного билета, тогда:
+	Предполагаем что выражение под скобками положительно, ведь иначе не выгодно покупать ни одного билета. Попробуем угадать $P$:  
 
 	\begin{align*}
 		P(s) &= A - c \sum_{j \in N} s_j \implies \\
@@ -91,8 +91,8 @@
 
 	\begin{align*}
 		P(s) &= \left(\frac{A}{\sum_{j \in N} s_j} - c\right) \prod_{j \in N} s_j \implies  \\
-		P(s_{i}, s_{-i}) - P(s_i', s_{-i}) &= s_i \prod_{j \in N \setminus i } s_j \left(\frac{A}{s_i + \sum_{j \in N \setminus i} s_j} - c\right) - s_i' \prod_{j \in N \setminus i} \left(\frac{A}{s_i' + \sum_{j \in N \setminus i} s_j} - c\right) = \\
-										   &= \prod_{j \in N \setminus i} s_j (u_i(s_i, s_{-i} - u_i(s_i' - s_{-i})))
+		P(s_{i}, s_{-i}) - P(s_i', s_{-i}) &= s_i \prod_{j \in N \setminus i } s_j \left(\frac{A}{s_i + \sum_{j \in N \setminus i} s_j} - c\right) - s_i' \prod_{j \in N \setminus i} s_j \left(\frac{A}{s_i' + \sum_{j \in N \setminus i} s_j} - c\right) = \\
+						   &= \left(\prod_{j \in N \setminus i} s_j\right) \left( u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) \right) 
 	\end{align*}
 
 	Тогда при $s_j \neq 0, \ \forall j \in N$ получаем что  $u_i(s_i, s_{-i}) - u_i(s_i', s_{-i})$ и  $P(s_i, s_{-i}) - P(s_i', s_{-i})$ одного знака.
