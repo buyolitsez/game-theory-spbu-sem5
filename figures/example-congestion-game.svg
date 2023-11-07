@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.3675965"
-     inkscape:cx="500.50758"
-     inkscape:cy="216.04188"
+     inkscape:zoom="2.9776335"
+     inkscape:cx="466.81366"
+     inkscape:cy="199.31936"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -73,62 +73,54 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0, -177)">
-    <g
-       id="g4"
-       transform="translate(5.3456841,5.3404551)">
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="path1"
-         cx="74.654335"
-         cy="207.51892"
-         r="1.1582959" />
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="circle1"
-         cx="94.654297"
-         cy="207.51892"
-         r="1.1582959" />
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="circle2"
-         cx="114.6543"
-         cy="207.51892"
-         r="1.1582959" />
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="circle3"
-         cx="134.6543"
-         cy="207.51892"
-         r="1.1582959" />
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="circle4"
-         cx="154.6543"
-         cy="207.51892"
-         r="1.1582959" />
-    </g>
-    <g
-       id="g9"
-       transform="translate(19.840923,2.5771179)">
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="circle5"
-         cx="80.159096"
-         cy="234.42288"
-         r="1.1582959" />
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="circle6"
-         cx="100.15906"
-         cy="234.42288"
-         r="1.1582959" />
-      <circle
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
-         id="circle7"
-         cx="120.15906"
-         cy="234.42288"
-         r="1.1582959" />
-    </g>
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="path1"
+       cx="80.000023"
+       cy="212.85938"
+       r="1.1582959" />
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="circle1"
+       cx="99.999985"
+       cy="212.85938"
+       r="1.1582959" />
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="circle2"
+       cx="119.99998"
+       cy="212.85938"
+       r="1.1582959" />
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="circle3"
+       cx="139.99998"
+       cy="212.85938"
+       r="1.1582959" />
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="circle4"
+       cx="159.99998"
+       cy="212.85938"
+       r="1.1582959" />
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="circle5"
+       cx="100.00002"
+       cy="237"
+       r="1.1582959" />
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="circle6"
+       cx="119.99998"
+       cy="237"
+       r="1.1582959" />
+    <circle
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.499997;paint-order:stroke fill markers"
+       id="circle7"
+       cx="139.99998"
+       cy="237"
+       r="1.1582959" />
     <path
        style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.3;stroke-dasharray:none;paint-order:stroke fill markers"
        d="m 79.899948,212.72743 20.085267,24.23952"
@@ -166,7 +158,7 @@
        d="m 139.56642,236.95754 20.21974,-24.24947"
        id="path18" />
     <g
-       transform="matrix(0.3175,0,0,0.3175,163.94367,210.53652)"
+       transform="matrix(0.3175,0,0,0.3175,163.94367,211.77773)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -205,7 +197,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,149.71515,234.94357)"
+       transform="matrix(0.3175,0,0,0.3175,164.19676,235.91836)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -244,7 +236,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,101.26578,239.28566)"
+       transform="matrix(0.3175,0,0,0.3175,99.479244,239.29948)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -283,7 +275,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,76.844068,208.89614)"
+       transform="matrix(0.3175,0,0,0.3175,79.479244,208.80488)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -322,7 +314,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,120.56712,239.45066)"
+       transform="matrix(0.3175,0,0,0.3175,119.36994,239.29948)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -361,7 +353,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,98.16349,208.86732)"
+       transform="matrix(0.3175,0,0,0.3175,99.369946,208.80488)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -400,7 +392,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,140.62621,239.53615)"
+       transform="matrix(0.3175,0,0,0.3175,139.3427,239.23003)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -439,7 +431,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,118.40112,209.24266)"
+       transform="matrix(0.3175,0,0,0.3175,119.34269,208.80488)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -478,7 +470,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,137.56984,208.80361)"
+       transform="matrix(0.3175,0,0,0.3175,139.30041,208.805)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
@@ -517,7 +509,7 @@
       </g>
     </g>
     <g
-       transform="matrix(0.3175,0,0,0.3175,157.16062,208.94538)"
+       transform="matrix(0.3175,0,0,0.3175,159.36995,208.80488)"
        ns1:version="1.9.0"
        ns1:texconverter="pdflatex"
        ns1:pdfconverter="inkscape"
