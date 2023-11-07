@@ -277,7 +277,7 @@
 \end{align*}
 
 \begin{df}[Потенциальная игра]
-	Игра в нормальной форме Г называется потенциальной, если существует $P : \prod_{i \in N} S_i \to \R$, такая что 
+  Игра в нормальной форме $\Gamma = (N, S, u)$ называется потенциальной, если существует $P : S \to \R$, такая что 
 
 	\begin{align*}
 		u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) = P(s_i, s_{-i}) - P(s_i', s_{-i}), \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i}
@@ -286,8 +286,9 @@
 \end{df}
 
 \begin{claim}
-	Пусть $s^* \in \text{argmax}_{s \in S} P(s)$.
-	Тогда  $s^*$ - неравенство Неша в игре Г. 
+  \label{claim:equlibrim_in_potential_games}
+	Пусть $\Gamma$~--- потенциальная игра с потенциалом $P$ и $s^* \in \text{argmax}_{s \in S} P(s)$.
+	Тогда  $s^*$~--- равновесие Неша в игре $\Gamma$. 
 \end{claim}
 
 \begin{proof}
@@ -304,11 +305,25 @@
 		u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) \geqslant 0 \iff P(s_i, s_{-i}) - P(s_i', s_{-i}) \geqslant 0, \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i}
 	\end{align*}
 
-	Аналогичное утверждение тому, что приведено выше справедливо и для ординально-потенциальной игры.
 \end{df}
 
+Аналогично утверждению \ref{claim:equlibrim_in_potential_games} в ординально-потенциальной игре существует равновесие:
+
+\begin{claim}
+  $\text{argmax}_{s\in S} P(s)$~--- равновесия Неша в ординально-потенциальной игре.  
+\end{claim}
+
 \begin{exmpl}
-	Пусть $u_i(s) = s_i$, где  $S_i = [0, A_i]$, тогда  $P(s) = \sum_{i \in N} s_i$.
+	Пусть $\Gamma = (N, S, u)$ такая, что $u_i(s) = s_i$, $S_i = [0, A_i]$, тогда  $\Gamma$~--- потенциальная игра с функцией потенциала $P(s) = \sum_{i \in N} s_i$.
+
+	\begin{proof}
+		
+	  \begin{align*}
+		u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) &= s_i - s_i' = \\
+						     &= \left(\sum_{j \in N \setminus i} s_j + s_i\right) - \left(\sum_{j \in N \setminus i} s_j + s_i'\right) = \\ 
+						     &= P(s_i, s_{-i}) - P(s_i', s_{-i})
+	  \end{align*}
+	\end{proof}
 \end{exmpl}
 
 \begin{exmpl}[Олигаполия Курно]

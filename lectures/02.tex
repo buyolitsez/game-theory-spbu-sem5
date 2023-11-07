@@ -75,7 +75,7 @@
 		u_i(s) = s_i\left(\frac{A}{\sum_{j \in N} s_j} - c\right)
 	\end{align*}
 
-	Предполагаем что выражение под скобками положительно, ведь иначе не выгодно покупать ни одного билета, тогда:
+	Предполагаем что выражение под скобками положительно, ведь иначе не выгодно покупать ни одного билета. Попробуем угадать $P$:  
 
 	\begin{align*}
 		P(s) &= A - c \sum_{j \in N} s_j \implies \\
@@ -91,45 +91,66 @@
 
 	\begin{align*}
 		P(s) &= \left(\frac{A}{\sum_{j \in N} s_j} - c\right) \prod_{j \in N} s_j \implies  \\
-		P(s_{i}, s_{-i}) - P(s_i', s_{-i}) &= s_i \prod_{j \in N \setminus i } s_j \left(\frac{A}{s_i + \sum_{j \in N \setminus i} s_j} - c\right) - s_i' \prod_{j \in N \setminus i} \left(\frac{A}{s_i' + \sum_{j \in N \setminus i} s_j} - c\right) = \\
-										   &= \prod_{j \in N \setminus i} s_j (u_i(s_i, s_{-i} - u_i(s_i' - s_{-i})))
+		P(s_{i}, s_{-i}) - P(s_i', s_{-i}) &= s_i \prod_{j \in N \setminus i } s_j \left(\frac{A}{s_i + \sum_{j \in N \setminus i} s_j} - c\right) - s_i' \prod_{j \in N \setminus i} s_j \left(\frac{A}{s_i' + \sum_{j \in N \setminus i} s_j} - c\right) = \\
+						   &= \left(\prod_{j \in N \setminus i} s_j\right) \left( u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) \right) 
 	\end{align*}
 
 	Тогда при $s_j \neq 0, \ \forall j \in N$ получаем что  $u_i(s_i, s_{-i}) - u_i(s_i', s_{-i})$ и  $P(s_i, s_{-i}) - P(s_i', s_{-i})$ одного знака.
 
 	Проверим на $s_i = 0, s_i' \neq 0$, тогда  $u_i(s_i, s_{-i}) = 0$ и  $u_i(s_i', s_{-i}) \neq 0$, но  $P(s_i, s_{-i}) - P(s_i', s_{-i}) = 0$.
+
+	{\it  B общем случае не получилось решить. Но если $s_i \ne 0 \ \forall i$, то потенциал подходит.} 
 \end{exmpl}
+
+\subsection{Необходимые и достаточные условия существования потенциала}
 
 Пусть Г - игра в нормальной форме, рассмотрим двух игроков $i, j \in N, \, s_i, s_i' \in S_i, \, s_j, s_j' \in S_j, \, s_{-ij} \in S_{-ij}$, где Г  $= (N, \{s_i\}_{i \in N}, \{u_i\}_{i \in N})$, предположим что Г потенциальная игра с функцией  $P$, тогда давайте запишем равенства и по очереди будем менять стратегию у $i$ и  $j$, заодно введем новое обозначение $\Delta$:
 
+\begin{minipage}{.4\linewidth}
 \begin{align*}
-	u_i(s_i, s_j, s_{-ij}) - u_i(s_i', s_j, s_{-ij}) &= P(s_i, s_j, s_{-ij}) - P(s_i', s_j, s_{-ij}) = \Delta_i \\
-	u_j(s_i', s_j, s_{-ij}) - u_j(s_i', s_j', s_{-ij}) &= P(s_i', s_j, s_{-ij}) - P(s_i', s_j', s_{-ij}) = \Delta_j \\
-	u_i(s_i', s_j', s_{-ij}) - u_i(s_i, s_j, s_{-ij}) &= P(s_i', s_j', s_{-ij}) - P(s_i, s_j', s_{-ij}) = \Delta_i' \\
-	u_j(s_i, s_j', s_{-ij}) - u_j(s_i, s_j, s_{-ij}) &= P(s_i, s_j', s_{-ij}) - P(s_i, s_j, s_{-ij}) = \Delta_j'
+  \Delta_i &\coloneq u_i(s_i, s_j, s_{-ij}) - u_i(s_i', s_j, s_{-ij})  \\
+  \Delta_j &\coloneq u_j(s_i', s_j, s_{-ij}) - u_j(s_i', s_j', s_{-ij})  \\
+  \Delta_i' &\coloneq u_i(s_i', s_j', s_{-ij}) - u_i(s_i, s_j', s_{-ij}) \\
+  \Delta_j' &\coloneq u_j(s_i, s_j', s_{-ij}) - u_j(s_i, s_j, s_{-ij})
 \end{align*}
+\end{minipage}
+\begin{minipage}{.1\linewidth}
+  \[\implies\]
+\end{minipage}
+\begin{minipage}{.4\linewidth}
+  \begin{align*}
+    \Delta_i &= P(s_i, s_j, s_{-ij}) - P(s_i', s_j, s_{-ij}) \\
+    \Delta_j &= P(s_i', s_j, s_{-ij}) - P(s_i', s_j', s_{-ij}) \\ 
+    \Delta_i' &= P(s_i', s_j', s_{-ij}) - P(s_i, s_j', s_{-ij}) \\
+    \Delta_j' &= P(s_i, s_j', s_{-ij}) - P(s_i, s_j, s_{-ij})
+  \end{align*}
+\end{minipage}
 
-Заметим что сумма правых частей равна 0.
+\begin{df}
+  $\Delta_i, \Delta_j, \Delta_i', \Delta_j'$~--- обозначения для разностей, указанных выше.
+\end{df}
 
-А также
-
-\begin{align*}
-	u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) &= P(s_i, s_{-i}) - P(s_i', s_{-i}) \\
+\begin{remrk}
+  Сделаем следующие наблюдения: 
+  \begin{enumerate}
+    \item $\exists$ функция потенциала $P \implies \Delta_i + \Delta_j + \Delta_i' + \Delta_j' = 0$  
+    \item $u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) = P(s_i, s_{-i}) - P(s_i', s_{-i}) $,
+      поэтому: 
+      \begin{align*}
 	\frac{\partial u_i}{\partial s_i} = \frac{\partial P}{\partial s_i} \quad&\quad \frac{\partial u_j}{\partial s_j} = \frac{\partial P}{\partial s_j} \\
 	\frac{\partial^2 u_i}{\partial s_i \partial s_j} = \frac{\partial^2 P}{\partial s_i \partial s_j} \quad&\quad \frac{\partial^2 u_j}{\partial s_j \partial s_i} = \frac{\partial^2 P}{\partial s_j \partial s_i}
 \end{align*}
+  \end{enumerate}
 
+  На самом деле каждое из этих условий не только необходимое, но и достаточное. О чём и говорит следующая теорема:
+\end{remrk}
 
-На самом деле каждое из этих условий достаточное:
-
-Теорема Takshi Ui, GFB.
-
-\begin{thm}[Необходимые и достаточные условия существования потенциала] \label{theorem:iff_for_potential}
-
-	Каждое из условий ниже необходимо и достаточно для существования потенциала у игры Г в нормальной форме.
+    \begin{thm}
+      \label{theorem:iff_for_potential}
+      Каждое из условий ниже необходимо и достаточно для существования потенциала у игры Г в нормальной форме.
 
 	\begin{enumerate}
-		\item \label{theorem_equation:iff_potential_deltas} Для любых  $i, j \in N$ верно  $\Delta_i + \Delta_j + \Delta_i' + \Delta_j' = 0$, где  $k$ по порядку  $\Delta$ это просто выражение в левой части на  $k$ строке выражения сверху \todo[inline]{адекватно написать}.
+		\item \label{theorem_equation:iff_potential_deltas} Для любых  $i, j \in N$ верно  $\Delta_i + \Delta_j + \Delta_i' + \Delta_j' = 0$
 
 		\item \label{theorem_equation:iff_potential_partial} $S_i = [a, b], u_i \in C^2$ - дважды дифференцируема по $s_i$ и
 
@@ -137,58 +158,64 @@
 				\frac{\partial^2 u_i}{\partial s_i \partial s_j} = \frac{\partial^2 u_j}{\partial s_j \partial s_i} \quad \forall i, j \in N
 			\end{align*}
 
-		\item \label{theorem_equation:iff_potential_P_Q}$\exists P: S \to \R, \, \exists Q_i: S_{-i} \to \R$, такие что:
+		      \item \label{theorem_equation:iff_potential_P_Q}$\exists P: \prod_{i \in N}S_i \to \R, \, \exists Q_i: S_{-i} \to \R$, такие что:
 
 			\begin{align*}
 				u_i(s) = P(s) + Q_i(s_{-i})
 			\end{align*}
 
-		\item \label{theorem_equation:iff_potential_Phi} $\exists \Phi_K : S_K \to \R, \, K \subseteq N, $, такие что 
+		\item \label{theorem_equation:iff_potential_Phi} $\exists \Phi_K : S_K \to \R, \, K \subseteq N$, такие что: 
 
 			 \begin{align*}
-				 u_i(s) = \sum_{\substack{K \subseteq N \\ i \in K} }\Phi_K(s_K)
+				 u_i(s) = \sum_{i \in K \subseteq N}\Phi_K(s_K)
 			\end{align*}
 
 	\end{enumerate}
-
 \end{thm}
 
 \begin{proof}
-	Докажем пункт \eqref{theorem_equation:iff_potential_P_Q}:
+	$ $
 
-	Достаточность очевидна.
+	Пункт \eqref{theorem_equation:iff_potential_P_Q}:
 
-	В обратную сторону, пусть существует потенциал $P$, тогда:
+	\begin{itemize}
+	  \item \textbf{Достаточность}. Очевидно.
+	  \item \textbf{Необходимость}. Пусть существует потенциал $P$, тогда 
+	  \begin{align*}
+		  u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) &= P(s_i, s_{-i}) - P(s_i', s_{-i}), \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i} \\
+		  u_i(s_i, s_{-i}) - P(s_i, s_{-i}) &= u_i(s_i', s_{-i}) - P(s_i', s_{-i})\\
+		  R(s) &= u_i(s_i, s_{-i}) - P(s_i, s_{-i}) \implies \\
+		  R(s_i, s_{-i}) &= R(s_i', s_{-i}), \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i} \implies \\
+		  R(s_i, s_{-i}) &= Q(s_{-i}) \implies \\
+		  u_i(s) &= P(s) + Q_i(s_{-i})
+	  \end{align*}
+	\end{itemize}
 
-	\begin{align*}
-		u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) &= P(s_i, s_{-i}) - P(s_i', s_{-i}), \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i} \\
-		u_i(s_i, s_{-i}) - P(s_i, s_{-i}) &= u_i(s_i', s_{-i}) - P(s_i', s_{-i})\\
-		R(s) &= u_i(s_i, s_{-i}) - P(s_i, s_{-i}) \implies \\
-		R(s_i, s_{-i}) &= R(s_i', s_{-i}), \ \forall s_i, s_i' \in S_i, \ \forall s_{-i} \in S_{-i} \implies \\
-		R(s_i, s_{-i}) &= Q(s_{-i}) \implies \\
-		u_i(s) &= P(s) + Q_i(s_{-i})
-	\end{align*}
 
 	Пункт \eqref{theorem_equation:iff_potential_Phi}:
 
-	Достаточность:
-
-	\begin{align*}
+	\begin{itemize}
+	  \item \textbf{Достаточность}. 
+	  	\begin{align*}
 		P(s) = \sum_{\substack{K \subseteq N \\ K \neq \varnothing}} \Phi_K(s_K)
+		\end{align*}
+
+		покажем, что данный потенциал подходит:
+	\begin{align*}
+	  P(s_i, s_{-i}) - P(s_i', s_{-i}) &= \sum_{\substack{K \subseteq N \\ K \ne \varnothing}} \Phi_K(s_K) - \sum_{\substack{K \subseteq N \\ K \ne \varnothing}} \Phi_K (s_K') = \\
+					       &= \sum_{i \in K \subseteq N} \Phi_K(s_K) - \sum_{i \in K \subseteq N} \Phi_K(s_K') = \\
+					       &= u_i(s_i, s_{-i}) - u_i(s_i', s_{-i})
 	\end{align*}
 
-	Необходимость:
-
-	Из пункта \eqref{theorem_equation:iff_potential_P_Q} найдутся $P, Q_i$:
-
-	 \begin{align*}
+      \item \textbf{Необходимость}. Пусть $\Gamma$~--- потенциальная игра, тогда по пункту \eqref{theorem_equation:iff_potential_P_Q} найдутся $P, Q_i$:
+ 	 \begin{align*}
 		 u_i(s) = P(s) + Q_i(s_{-i})
 	\end{align*}
 
 	Тогда положим 
 
 	\begin{align*}
-		\Phi_K(s_K) = \begin{cases}
+		\Phi_K(s_K) \coloneq \begin{cases}
 			P(s) + \sum_{i \in N} Q_i(s_{-i}) &\text{ при } K = N \\
 			-Q_i(s_{-i}) &\text{ при } K = N \setminus{i} \\
 			0 &\text{ иначе}
@@ -201,29 +228,31 @@
 		\sum_{\substack{K \subseteq N \\ i \in K}} \Phi_K(s_K) &= \Phi_N(s) + \sum_{j \in N \setminus \{i\}} \Phi_{N \setminus \{j\}} (s_{N \setminus \{j\}}) = \\
 															   &= P(s) + \sum_{j \in N} Q_j(s_{-j}) - \sum_{j \in N \setminus \{i\}} Q_{j}(s_{-j}) = P(s) + Q_i(s_{-i}) = u_i(s)
 	\end{align*}
-
+	\end{itemize}
 \end{proof}
 
 \begin{exmpl}[Пример для пункта \eqref{theorem_equation:iff_potential_Phi} Теоремы \ref{theorem:iff_for_potential}]
 	Пусть $N = \{1, 2, 3\}$, тогда 
-
 	\begin{align*}
 		u_1(s_1, s_2, s_3) &= \Phi_1(s_1) + \Phi_{12}(s_1, s_2) + \Phi_{13}(s_1, s_3) + \Phi_{123}(s_1, s_2, s_3) \\
-		u_1(s_1, s_2, s_3) &= \Phi_2(s_2) + \Phi_{12}(s_1, s_2) + \Phi_{23}(s_2, s_3) + \Phi_{123}(s_1, s_2, s_3) \\
-		u_1(s_1, s_2, s_3) &= \Phi_3(s_3) + \Phi_{13}(s_1, s_3) + \Phi_{23}(s_2, s_3) + \Phi_{123}(s_1, s_2, s_3)
+		u_2(s_1, s_2, s_3) &= \Phi_2(s_2) + \Phi_{12}(s_1, s_2) + \Phi_{23}(s_2, s_3) + \Phi_{123}(s_1, s_2, s_3) \\
+		u_3(s_1, s_2, s_3) &= \Phi_3(s_3) + \Phi_{13}(s_1, s_3) + \Phi_{23}(s_2, s_3) + \Phi_{123}(s_1, s_2, s_3)
 	\end{align*}
 
 \end{exmpl}
 
 \begin{df}[Модель заполнения]
-	Модель заполнения это $(N, M, \{s_i\}{i \in N}, \{c_j\}_{j \in M})$, где  $N \in [n], M \in [m]$.
-	$M$ назовем множеством ресурсов, а  $c_j: \R \to \R$ - выплаты от ресурсов.
-
-	 $N$ - кто заполняет(игроки),  $M$ - чем заполняет(ресусы), $s_i$ - стратегии игрока(выбор каких то ресурсов), можно выбрать все ресурсы, а можно частично,  $c_j$ - выплаты от ресурсов. 
+	$(N, M, \{s_i\}_{i \in N}, \{c_j\}_{j \in M})$ будем называть моделью заполнения. 
+	\begin{itemize}
+	  \item $N = [n]$~--- <<кто>> заполняет (множество игроков)
+	  \item $M = [m]$~--- <<чем>> заполняет (множество ресурсов)
+	  \item $s_i$~--- стратегии игрока (выбор каких-то ресурсов)
+	  \item $c_j$~--- выплаты от ресурсов. 
+	\end{itemize}
 \end{df}
 
-\begin{df}[Игра заполнения (congestion game)]
-	Игра заполнения это игра игра в нормальной форме $(N, \{s_i\}_{i \in N}, \{u_i\}_{i \in N}$, где 
+\begin{df}[Игра заполнения. Congestion game]
+	Игра заполнения~--- это игра игра в нормальной форме $(N, \{s_i\}_{i \in N}, \{u_i\}_{i \in N}$), где 
 
 	\begin{align*}
 		u_i(s) &= \sum_{j \in s_i} c_j(k_j(s)), \quad \text{где} \\
