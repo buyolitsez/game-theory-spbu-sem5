@@ -1,0 +1,195 @@
+% 08.12.2023
+
+\section{Optimal Auctions (Design)}
+
+Тема ассоциируется с ученым Roger Myerson (Nobel Prize 2007)
+
+Прямая задача: по игре понять что с ней будет происходить
+Обратная задача: в какую игру надо дать играть людям/фирмам/странам чтобы максимизировать критерий. Называется устройство механических механизмов - Mechanism Design.
+
+Будем максимизировать ожидаемый доход конкретного продавца, который определяет правила игры.
+
+\begin{exmpl}
+	Есть один неделимый товар(например картина), он у вас уже есть, надо его продать(для нас он цены сам по себе не несет).
+	Есть два потенциальных покупателя, у нас о них не полная информация.
+
+	Назовем $\theta_i$ - сколько денег готов платить покупатель  $i$ за данный товар(мы ее не знаем, private information).
+	Считаем что $\theta_i \sim U[0, 1]$
+
+	Полезность это $u_i = x_i \theta_i - t_i$, $t_i$ - ожидаемая оплата игрока $i$ за товар, а  $x_i$ это вероятность того что товар достанется  $i$ игроку(раньше это было количество товара, но в нашем случае товар один и не делим).
+
+	Хотим максимизировать  $\E[t_1 + t_2]$, что делать? Хотим из всех возможных способов продажи выбрать максимизирующий нашу прибыль.
+
+	Рассмотрим следующую стратегию(Sequential posted prices):
+	\begin{enumerate}
+		\item Предложить первому покупателю купить за цену $p_1$
+		\item Если он отверг, предложим второму покупателю за цену $p_2$
+		\item Если и он отказался, то завершаем игру.
+	\end{enumerate}
+
+	Смотреть рисунок \ref{fig:rasp_example_3_lec}
+
+	Наш ожидаемый доход(будем обозначать $R$ от слова revenue):
+
+	\begin{align*}
+		\E R &= p_1 \Pr[\theta_1 > p_1] + p_2 \Pr[\theta_2 > p_2 \land \theta_1 < p_1] &= \\
+			 &= p_1 (1 - p_1) + p_2 p_1 (1 - p_2) \to \max_{p_1, p_2} &\implies [p_2 = \frac{1}{2}]\\
+			 &= p_1 (1 - p_1) + \frac{1}{4} p_1 = \frac{5}{4} p_1 - p_1^2 \to \max_{p_1} &\implies p_1 = \frac{5}{8}
+	\end{align*}
+
+	А значит $\E R = \frac{25}{64}$ 
+
+\begin{figure}[ht]
+    \centering
+	\incfig[0.4]{rasp_example_3_lec}
+    \caption{Кому будет продана картина в зависимости от значений $\theta_1, \theta_2$ для стратегии~1.}
+    \label{fig:rasp_example_3_lec}
+\end{figure}
+
+	Стратегия 2. Conduct first-price auction (FPA)
+
+	Игроки делают ставки(1 раз), отдаем картину тому кто предложил наибольшее число.
+
+	Смотреть рисунок \ref{fig:rasp_example_strategy_2_3_lec}
+
+	Хотим посчитать равновесие Байеса-Неша.
+
+	$\beta_i(\theta_i) \colon [0, 1] \to \R$ - ставки игроков
+
+	Покажем, что $\{ \beta_i^*(\theta_i) = \frac{\theta_i}{2}\}_{i\in [2]}$ - является равновесием Байсе-Неша.
+
+	Для краткости обозначим $b_i = \beta_i(\theta_i)$ и $b_i^* = \beta_i^*(\theta_i)$
+
+	Полезность игрока это:
+
+
+	\begin{align*}
+		u_i = (\theta_1 - b_1) \Pr[b_1 > b_2^*] = (\theta_1 - b_1) Pr\left[b_1 > \frac{Q_2}{2}\right] = (\theta_1 - b_1)(2 b_1) \to \max_{b_1} \implies b_1 = \frac{Q_1}{2}
+	\end{align*}
+
+	А значит $\beta^*$ это равновесие по Байсе-Нешу.
+
+	Тогда ожидаемый доход это  $\frac{\E \max\{\theta_1, \theta_2\}}{2} = \frac{2}{3} \cdot \frac{1}{2} = \frac{1}{3}$.
+
+
+	Т.е. стратегия 1 лучше стратегии 2.
+
+\begin{figure}[ht]
+    \centering
+	\incfig[0.4]{rasp_example_strategy_2_3_lec}
+    \caption{Кому будет продана картина в зависимости от значений $\theta_1, \theta_2$ для стратегии~2.}
+    \label{fig:rasp_example_strategy_2_3_lec}
+\end{figure}
+
+$\E R \leqslant [\max \{\theta_1, \theta_2\} = \frac{2}{3}]$, а значит получить больше $\frac{2}{3}$ невозможно.
+
+На рисунке \ref{fig:rasp_example_line_win_amount} посмотрим что мы уже поняли про задачу.
+
+\begin{figure}[ht]
+    \centering
+	\incfig[0.5]{rasp_example_line_win_amount}
+    \caption{Сколько мы умеем получать дохода(их наших первых стратегий) и сколько нельзя, зеленые нижние границы, красные верхние.}
+    \label{fig:rasp_example_line_win_amount}
+\end{figure}
+
+Стратегия 3: общий случай(General Set-up), среди всех игр с равновесием найдем максимизирующую наш доход.
+
+Пусть $n$ покупателей, выигрыш каждого это  $u_i = x_i \theta_i - t_i$ и теперь просто считаем  $\theta_i \in [0, 1]$ независимыми и непрерывными(их распределения нам известны).
+
+\begin{align*}
+	\mathcal X &= \left\{ \vec x \in [0, 1]^{n} \colon \sum_{i = 1}^{n} \leqslant 1 \right\} &\text{~-- вектор распределений} \\
+	\mathcal T &= \R^{n} &\text{~-- вектор трансфертов} \\
+	\text{Mechanism } \mathcal M &= (B_1, B_2, \ldots, B_n, X(\cdot), T(\cdot))
+\end{align*}, где $B_i$ - множество возможных действий для покупателя  $i$, любые измеримые множества, $X \colon B_1 \times \dots B_n \to \mathcal X$ и $T \colon B_1 \times \dots B_n \to \mathcal T$, два отображения которые назначают вероятности купить у человека и трансферты. Хотим найти оптимальный механизм.
+
+Т.е. при фиксированном механизме $\mathcal M$ игроки играют равновесие Байса-Неша, т.е. отображения  $\beta_i \colon \theta_i \to B_i$(выбирает действие для игрока).
+
+Наша задача найти механизм $\mathcal M$:
+
+ \begin{align*}
+	 \E R \to \max \iff \E \left[\sum_{i = 1}^{n} T_i(\beta_1^*(\theta_1), \beta_2^*(\theta_2), \ldots, \beta_n^*(\theta_n))\right] \to \max
+\end{align*}
+
+При условии s.t, что ожидаемый выигрыш каждого игрока неотрицателен:
+
+\begin{align*}
+	\E [u_i | \theta_i] \geqslant 0, \forall i \in [n], \forall \theta_i
+\end{align*}
+
+Воспользуемся тем, что игроки играют равновесие $\{\beta_i^*\}_{i \in [n]}$
+
+ \begin{align*}
+	 &\E_{\theta_{-i}} X_i(\beta_i^*(\theta_i), \beta_{-i}^*(\theta_{-i})) \cdot \theta_i - T_i(\beta_i^*(\theta_i), \beta_i^*(\theta_{-i}))	 \geqslant \\
+	 \geqslant &\E_{\theta_{-i}} X_i(b_i, \beta_{-i}^*(\theta_{-i})) \cdot \theta_i - T_i(b_i, \beta_i^*(\theta_{-i})), \, \forall i, \theta_i, b_i \\
+\end{align*}
+
+Предположим что найдется $\theta_i' \colon b_i = \beta_i^*(\theta_i')$.
+
+Обозначим:
+
+\begin{align*}
+	x(\theta) &= X \circ \beta \\
+	t(\theta) &= T \circ \beta \\
+\end{align*}
+
+Тогда равновесие говорит, что:
+
+\begin{align*}
+	\E_{\theta_{-i}} x_i(\theta_i, \theta_{-i}) \theta_i - t_i(\theta_i, \theta_{-i}) &\geqslant \E_{\theta_{-i}} x_i(\theta_i', \theta_i) - t_i(\theta_i', \theta_{-i})
+\end{align*}
+
+Обозначим $\tilde x_i(\theta_i) = \E_{\theta_{-i}} x_i(\theta_i, \theta_{-i})$ и  $\tilde t_i(\theta_i) = \E_{\theta_{-i}} t_i(\theta_i, \theta_{-i})$, тогда:
+
+ \begin{align*}
+	\tilde x_i(\theta_i) \theta_i - \tilde t_i(\theta_i) \geqslant \tilde x_i(\theta_i') \theta_i - \tilde t_i(\theta_i')
+\end{align*}
+
+Тогда и только тогда(показали на прошлой лекции):
+
+\begin{align*}
+	\begin{cases}
+		\tilde t_i (\theta_i) = \tilde t_i(0) + \tilde x_i(\theta_i) \theta_i - \int\limits_{0}^{\theta_i} \tilde x_i(s) ds \\
+		\tilde x_i(\theta_i) \text{~-- неубывающая} 
+	\end{cases}
+\end{align*}
+
+Ожидаемый доход($f_i$ - плотность  $\theta_i$):
+
+\begin{align*}
+	\E R &= \int\limits_{\vec \theta} \left(\sum_{i = 1}^{n} t_i (\theta_i)\right) \prod_{i = 1}^{n} f_i(\theta_i) \, d \vec \theta =  \\
+		 &= \sum_{i = 1}^{n} \int\limits_{\vec \theta} \tilde t_i(\theta_i) f_i(\theta_i) \, d \theta_i = \sum_{i = 1}^{n} [\int\limits_{0}^{1} \tilde x_i(\theta_i) \theta_i - \int\limits_{0}^{1} x_i(s) \, ds] f_i(\theta_i) \, d \theta_i = \\
+		 &= \int \dots \int \sum_{i = 1}^{n} x_i(\theta_i) \left(\theta_i - \underbrace{\frac{1 - F_i(\theta_i)}{f_i(\theta_i)}}_{=\psi_i(\theta_i)}\right) \prod_{i = 1}^{n} f_i(\theta_i) \, d \vec \theta \to \max
+\end{align*}
+
+Тогда оптимальный $x_i^*$ равен:
+
+ \begin{align*}
+	x_i^*(\theta_i) \begin{cases}
+		1, \psi_i(\theta_i) \geqslant \psi_j (\theta_j) \; \forall j \neq i, \psi_i(\theta_i) \geqslant 0 \\
+		0, \text{ иначе }
+	\end{cases}
+\end{align*}
+
+Если $\theta_i \sim U[0, 1]$, то 
+
+\begin{align*}
+	\psi_i(\theta_i) = \theta_i - \frac{1 - F_i(\theta_i)}{f_i(\theta_i)} = \theta_i - \frac{1 - \theta_i}{1} = 2\theta_i - 1
+\end{align*}
+
+\begin{figure}[ht]
+    \centering
+	\incfig[0.4]{rasp_theorem_lec3}
+    \caption{Кому придет товар.}
+    \label{fig:rasp_theorem_lec3}
+\end{figure}
+
+Посмотрим когда первый игрок гаранитрованно получит товар:
+
+\begin{align*}
+	x_1 = 1 \iff \begin{cases} 2 \theta_1 - 1 \geqslant 2 \theta_2 - 1 \iff \theta_1 \geqslant \theta_2 \\ 2 \theta_1 - 1 \geqslant 0 \iff \theta_1 \geqslant \frac{1}{2} \end{cases}
+\end{align*}
+
+Теперь смотрим на картинку \ref{fig:rasp_theorem_lec3}
+
+
+\end{exmpl}
