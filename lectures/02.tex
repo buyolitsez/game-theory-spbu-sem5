@@ -284,7 +284,7 @@
 	P(s) = \sum_{j \in \cup_{i \in N} s_i} \sum_{k = 1}^{k_j(s)} c_j(k)
 \end{align*}
 
-\begin{problem}
+\begin{problem}[Coalition partition game.]
 	Пусть игроки распределяются на коалиции, выигрыш игрока это значение Шепли.
 
 	Пусть, например коалиции $\{\{1, 2, 3\}, \{4, 5\}\}$ и считаем, что $v$ дана.
@@ -300,5 +300,32 @@
 
 	Существует ли устойчивое по Нешу разбиение? Доказать что да
 \end{problem}
+
+\begin{proof}[\normalfont\textsc{Решение}]
+	Положим:
+	\begin{align*}
+		t(\pi) = \sum_{\substack{K \subseteq \pi \\ K \neq \varnothing}} \frac{\lambda_K(v)}{|K|} \implies t(\varnothing) = 0
+	\end{align*}
+
+	Тогда:
+
+	\begin{align*}
+		t(\pi(i)) - t(\pi(i) \setminus \{i\}) = \sum_{\substack{K \subseteq \pi(i) \\ i \in K}} \frac{\lambda_K(v)}{|K|} = u_i(\pi)
+	\end{align*}
+
+	Считаем, что $f(\pi)$ ~-- множество коалиций.
+
+	Положим:
+
+	\begin{align*}
+		P(\pi) &= \sum_{X \in f(\pi)} t(X) \implies [\text{пусть $\pi'$ получена из  $\pi$ переходом  $i$ игрока}] \\
+		\implies P(\pi) - P(\pi') &= \sum_{X \in f(\pi)} t(X) - \sum_{X \in f(\pi')} t(X) =  [\text{$i$ перешел из  $\pi(i)$ в  $A$}] = \\
+		&= t(\pi(i)) + t(A) - t(\pi(i)) \setminus \{i\}) - t(A \cup \{i\}) = \\
+		&= \mu_i(\pi) - \mu_i(\pi') \implies P \text{ ~-- потенциал }
+	\end{align*}
+
+	Значит найдется $\pi \colon P(\pi) = \max P \implies \pi$ удовлетворяет неравенству Неша.
+
+\end{proof}
 
 
