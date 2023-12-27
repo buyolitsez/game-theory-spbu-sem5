@@ -50,6 +50,8 @@
 	Пусть $N = \{1, 2, 3\}$. Тогда $v_{12}(1) = 0, v_{12}(2) = 0, v_{12}(3) = 0, v_{12}(12) = 1, v_{12}(13) = 0, v_{12}(23) = 0, v_{12}(123) = 1$.
 \end{exmpl}
 
+Определим интуитивные аксиомы которым мы хотим чтобы удовлетворял справедливый дележ.
+
 \begin{df}[Аксиомы] \label{axiom:shapley}
 	\begin{enumerate}
 		\item Аксиома эффективности.\label{axiom:shapley_efficenty} 
@@ -96,6 +98,8 @@
 
 \end{thm}
 
+Доказательство будет приведено дальше.
+
 \begin{lm} \label{lemma:win_unaminity_game}
 	Пусть $\phi $ удовлетворяет аксиомам \ref{axiom:shapley}, тогда 
 
@@ -125,7 +129,7 @@
 \end{proof}
 
 \begin{lm} \label{lemma:basis_to_unaminity_game}
-	На множестве $G(N)$ существует базис из  $\{v_S(K)\}$, т.е. для произвольное $v \in G(N)$ выполняется:
+	На множестве $G(N)$ существует базис из  $\{v_S(K)\}$, т.е. для произвольного $v \in G(N)$ выполняется:
 	\begin{align*}
 		v(K) = \sum_{S \subseteq N} \lambda_S(v) \cdot v_S(K)
 	\end{align*}, где 
@@ -141,7 +145,7 @@
 \begin{exmpl}
 	$N = \{1, 2, 3\}$
 	\begin{align*}
-		v(K) = \lambda_1 v_1(k) + \lambda_2 v_2(k) + \lambda_3 v_3(k) + \lambda_{12} v_{12}(k) + \lambda_{13}v_{13}(k) + \lambda_{23} v_{23}(k) + \lambda_{123} v_{123}(k)
+		v(K) = \lambda_1 v_1(K) + \lambda_2 v_2(K) + \lambda_3 v_3(K) + \lambda_{12} v_{12}(K) + \lambda_{13}v_{13}(K) + \lambda_{23} v_{23}(K) + \lambda_{123} v_{123}(K)
 	\end{align*}
 
 	Тогда 
@@ -149,7 +153,7 @@
 	\begin{align*}
 		v(\{1\}) &= \lambda_1, \quad v(\{2\}) = \lambda_2, \quad v(\{3\}) = \lambda_3 \\
 		v(\{12\}) &= \lambda_1 + \lambda_2 + \lambda_{12} \implies \lambda_{12} = v(\{12\}) - v(\{1\}) - v(\{2\}) \\
-		\lambda_{13} &= v({13}) - v(\{1\}) - v(\{3\}) \\
+		\lambda_{13} &= v(\{13\}) - v(\{1\}) - v(\{3\}) \\
 		\lambda_{23} &= v(\{23\}) - v(\{2\}) - v(\{3\}) \\
 		\lambda_{123} &= v(\{123\}) - v(\{12\}) - v(\{13\}) - v(\{23\}) + v(\{1\}) + v(\{2\}) + v(\{3\})
 	\end{align*}
@@ -170,27 +174,12 @@
 
 	По Лемме \ref{lemma:basis_to_unaminity_game}:
 	 \begin{align*}
-		 \phi_i(v) = \phi_i \left(\sum_{K \subseteq N} \lambda_K (v) \cdot v_K\right) =
+		&\phi_i(v) = \phi_i \left(\sum_{K \subseteq N} \lambda_K (v) \cdot v_K\right) = & \text{аксиома \eqref{axiom:shapley_additivity}} \\
+		&= \sum_{K \subseteq N} \phi_i(\lambda_K(v) \cdot v_K) = & \text{лемма \ref{lemma:uniformity_unaminity_game}}\\
+		&= \sum_{K \subseteq N} \lambda_K(v) \cdot \phi_i(v_K) = & \text{лемма \ref{lemma:win_unaminity_game}} \\
+		&= \sum_{\substack{K \subseteq N \\ i \in K}} \frac{\lambda_K(v)}{|K|} = &\text{[без подробностей]}\\
+		&= \sum_{\substack{K \subseteq N \\ i \in K}} \frac{(|K| - 1)! \cdot (|N| - |K|)!}{|N|} (v(K) - v(K \setminus \{i\}))
 	\end{align*}
-
-	По аксиоме \eqref{axiom:shapley_additivity}:
-
-	\begin{align*}
-		= \sum_{K \subseteq N} \phi_i(\lambda_K(v) \cdot v_K) =
-	\end{align*}
-
-	По Лемме \ref{lemma:uniformity_unaminity_game}:
-
-	\begin{align*}
-		= \sum_{K \subseteq N} \lambda_K(v) \cdot \phi_i(v_K) =
-	\end{align*}
-
-	По Лемме \ref{lemma:win_unaminity_game}:
-
-	\begin{align*}
-		= \sum_{\substack{K \subseteq N \\ i \in K}} \frac{\lambda_K(v)}{|K|} = \sum_{\substack{K \subseteq N \\ i \in K}} \frac{(|K| - 1)! \cdot (|N| - |K|)!}{|N|} (v(K) - v(K \setminus \{i\}))
-	\end{align*}
-
 	Последний переход без подробных объяснений.
 
 	Легко проверить что полученная $\phi$ удовлетворяет аксиомам.
@@ -258,7 +247,7 @@
 		u_1(s_1^*, s_2^*, s_3^*) - u_1(s_1, s_2^*, s_3^*) \geqslant 0, \ \forall s_1 \\
 		u_2(s_1^*, s_2^*, s_3^*) - u_2(s_1^*, s_2, s_3^*) \geqslant 0, \ \forall s_2 \\
 		u_3(s_1^*, s_2^*, s_3^*) - u_3(s_1^*, s_2^*, s_3) \geqslant 0, \ \forall s_3
-	\end{align*} ~--- равновесие по Нешу.
+	\end{align*} ~--- равновесие по Нешу в случае трёх игроков.
 
 	Существует в смешанных стратегиях, но порой нас интересует в чистых.
 
@@ -320,7 +309,7 @@
 		
 	  \begin{align*}
 		u_i(s_i, s_{-i}) - u_i(s_i', s_{-i}) &= s_i - s_i' = \\
-						     &= \left(\sum_{j \in N \setminus i} s_j + s_i\right) - \left(\sum_{j \in N \setminus i} s_j + s_i'\right) = \\ 
+						     &= \left(s_i + \sum_{j \in N \setminus i} s_j\right) - \left(s_i' + \sum_{j \in N \setminus i} s_j\right) = \\ 
 						     &= P(s_i, s_{-i}) - P(s_i', s_{-i})
 	  \end{align*}
 	\end{proof}

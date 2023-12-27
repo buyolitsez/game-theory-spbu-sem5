@@ -127,7 +127,7 @@
 \end{minipage}
 
 \begin{df}
-  $\Delta_i, \Delta_j, \Delta_i', \Delta_j'$~--- обозначения для разностей, указанных выше.
+  $\Delta_i, \Delta_j, \Delta_i', \Delta_j'$~--- обозначения для разностей, указанных выше(в левой части).
 \end{df}
 
 \begin{remrk}
@@ -164,7 +164,7 @@
 				u_i(s) = P(s) + Q_i(s_{-i})
 			\end{align*}
 
-		\item \label{theorem_equation:iff_potential_Phi} $\exists \Phi_K : S_K \to \R, \, K \subseteq N$, такие что: 
+		\item \label{theorem_equation:iff_potential_Phi} $\exists \Phi_K : \prod_{i \in K}S_i \to \R, \, K \subseteq N$, такие что: 
 
 			 \begin{align*}
 				 u_i(s) = \sum_{i \in K \subseteq N}\Phi_K(s_K)
@@ -252,7 +252,7 @@
 \end{df}
 
 \begin{df}[Игра заполнения. Congestion game]
-	Игра заполнения~--- это игра игра в нормальной форме $(N, \{s_i\}_{i \in N}, \{u_i\}_{i \in N}$), где 
+	Игра заполнения~--- это игра в нормальной форме $(N, \{s_i\}_{i \in N}, \{u_i\}_{i \in N}$), где 
 
 	\begin{align*}
 		u_i(s) &= \sum_{j \in s_i} c_j(k_j(s)), \quad \text{где} \\
